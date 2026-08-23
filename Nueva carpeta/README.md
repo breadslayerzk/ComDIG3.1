@@ -25,8 +25,6 @@ Se abrirá en el navegador (por defecto `http://localhost:8501`).
 
 ## Generar las tablas de la sustentación
 
-Las "CONDICIONES DE ENTREGA" piden dos tablas de resultados:
-
 - **Tabla 1**: MSE y SNR vs niveles de cuantificación (2 a 256), a la frecuencia
   de Nyquist, para la señal C.
 - **Tabla 2**: Error espectral vs frecuencia de muestreo (0.25·fs a 2·fs), con
@@ -39,12 +37,6 @@ python generar_tablas.py --audio ruta/a/tu_audio.wav
 Esto genera `tabla1_..._.csv/.png` y `tabla2_..._.csv/.png`, listos para
 pegar en el informe o mostrarlos en la sustentación.
 
-> **Nota sobre el audio:** RF2 exige un audio de mínimo 20 s. Debes
-> conseguir/grabar tú mismo un archivo `.wav` (mono o estéreo) — el proyecto
-> no incluye uno por licenciamiento. Cualquier grabadora de voz del celular
-> sirve; exporta a `.wav`.
-
-## Cómo se cumple cada requerimiento
 
 | Requerimiento | Dónde está implementado |
 |---|---|
@@ -60,10 +52,6 @@ pegar en el informe o mostrarlos en la sustentación.
 | RNF2 Sin funciones de alto nivel | Muestreo, cuantificación y reconstrucción (sinc) son implementación propia en `signal_utils.py`. `np.fft` se usa solo como herramienta de análisis para graficar espectros y calcular el error espectral, no reemplaza los bloques del sistema. |
 | RNF3 Reproducibilidad | Sin aleatoriedad; misma entrada → mismos resultados siempre |
 
-## Notas de teoría para preparar la sustentación (50% de la nota)
-
-Como el criterio de mayor peso en la rúbrica es la sustentación, conviene
-que puedas explicar —no solo mostrar— lo siguiente:
 
 1. **Teorema de muestreo (Nyquist-Shannon):** por qué `fs ≥ 2·B` evita
    aliasing. En la app, prueba a bajar `fs` por debajo del valor de Nyquist
@@ -93,7 +81,6 @@ que puedas explicar —no solo mostrar— lo siguiente:
 
 ## Ejecución del código para la Tabla 1 y 2 (resumen para el informe)
 
-Corre `generar_tablas.py`, adjunta las imágenes `.png` generadas y comenta
-en el informe/sustentación las tendencias observadas (MSE decreciente y SNR
+Corre `generar_tablas.py`, adjunta las imágenes `.png`  (MSE decreciente y SNR
 creciente con más niveles; error espectral creciente al alejarse de `fs`
 original en el resampling de audio).

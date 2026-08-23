@@ -48,8 +48,9 @@ def tabla1_niveles(a_param=2.0, duracion=4.0):
     for n in niveles_list:
         x_cuant, _ = su.cuantificar_uniforme(x_muestras, n)
         x_recon = su.reconstruir_senal(t_muestras, x_cuant, Ts, t_dense)
-        mse = su.error_medio_cuadratico(x_dense, x_recon)
-        snr = su.snr_cuantificacion(x_dense, mse)
+        # Tabla 1 evalúa el efecto exclusivo de la cuantificación.
+        # Así MSE y SNR no quedan contaminados por el error finito de reconstrucción.
+        mse, snr = su.metricas_cuantificacion(x_muestras, x_cuant)
         filas.append({"Niveles de cuantificación": n, "MSE": mse, "SNR (dB)": snr})
 
     df = pd.DataFrame(filas)
